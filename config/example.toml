@@ -1,0 +1,6 @@
+prof_port = 8057
+
+[mongo]
+    client_name = "test"
+    mongo_uri = "mongodb://127.0.0.1:27017/?replicaSet=test"
+
