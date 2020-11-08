@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"service-skeleton/server"
+	"github.com/zengqiang96/service-skeleton/server"
 
 	log "github.com/sirupsen/logrus"
 )
