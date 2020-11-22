@@ -2,6 +2,9 @@ package server
 
 import (
 	"context"
+	"errors"
+	"log"
+
 	"github.com/gin-gonic/gin"
 	"github.com/smallnest/rpcx/server"
 	"github.com/urfave/cli"
@@ -22,7 +25,7 @@ type HttpServer struct {
 }
 
 func NewHttpServer(ctx context.Context) *HttpServer {
-	s := new(HttpServer)
+	s := &HttpServer{App: cli.NewApp()}
 	s.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:  "c",
@@ -31,6 +34,15 @@ func NewHttpServer(ctx context.Context) *HttpServer {
 	}
 
 	s.Action = func(c *cli.Context) error {
+		if c.String("c") == "" {
+			return errors.New("usage: service-skeleton -c 配置文件路径")
+		}
+		log.Printf("开始读取配置文件: %s", c.String("c"))
+
+		if s.config, err :=  config.Load(c.String("c"));  err != nil {
+				return errors.Wrrap(err, "加载配置文件失败")
+		}
+
 		initComponents(ctx, s.config)
 		// http server 注册路由
 		if err := routes(s.server); err != nil {
@@ -76,6 +88,5 @@ func routes(engine *gin.Engine) error {
 }
 
 func initComponents(ctx context.Context, conf *config.Config) {
-
 
 }
