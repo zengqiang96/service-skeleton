@@ -1,7 +1,8 @@
-package application
+package service
 
 import (
 	"context"
+
 	"github.com/zengqiang96/service-skeleton/component/user"
 )
 

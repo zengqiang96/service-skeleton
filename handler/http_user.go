@@ -5,8 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	app "github.com/zengqiang96/service-skeleton/application"
 	"github.com/zengqiang96/service-skeleton/proto"
+	"github.com/zengqiang96/service-skeleton/service"
 )
 
 func GetUser(ctx *gin.Context) {
@@ -20,7 +20,7 @@ func GetUser(ctx *gin.Context) {
 		return
 	}
 
-	mUser := app.GetUser(ctx, getUserReq.Id)
+	mUser := service.GetUser(ctx, getUserReq.Id)
 	ctx.JSON(http.StatusOK, mUser)
 	return
 }
