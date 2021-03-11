@@ -1,5 +1,7 @@
 package user
 
+type MUser struct{}
+
 type IStorage interface {
 	GetUserById(id string) MUser
 }
@@ -10,6 +12,6 @@ func SetStorage(storage IStorage) {
 	storageInstance = storage
 }
 
-func getStorage() IStorage {
+func GetStorage() IStorage {
 	return storageInstance
 }
